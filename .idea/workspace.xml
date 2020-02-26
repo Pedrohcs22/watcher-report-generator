@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8c56fc0-f8cc-4852-8baa-8f5fa1901287" name="Default Changelist" comment="" />
+    <list default="true" id="c8c56fc0-f8cc-4852-8baa-8f5fa1901287" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dev/converter/FileToEntityConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dev/model/datatransferobject/ReportDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dev/model/enumeration/EntityIdentifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dev/service/CreateReportService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dev/service/InputOutputService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dev/service/WatchFolderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dev/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dev/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dev/model/AbstractPerson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dev/model/AbstractPerson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dev/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dev/model/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dev/model/Sale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dev/model/Sale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dev/model/Salesman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dev/model/Salesman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dev/model/enumeration/PersonType.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,11 +24,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Kotlin Enum" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -24,6 +41,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1YGCHVANRpiTTPAudjLBgj6CAju" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -69,7 +87,8 @@
       <option name="presentableId" value="Default" />
       <updated>1582559456590</updated>
       <workItem from="1582559471631" duration="1557000" />
-      <workItem from="1582561119896" duration="5336000" />
+      <workItem from="1582561119896" duration="10601000" />
+      <workItem from="1582725466674" duration="6735000" />
     </task>
     <servers />
   </component>
@@ -81,45 +100,108 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Auto_Import/0.0.1366.728@0.0.1366.728" timestamp="1582560359179" />
-    <state x="488" y="57" key="#com.intellij.ide.util.MemberChooser" timestamp="1582637125374">
+    <state x="488" y="57" key="#com.intellij.ide.util.MemberChooser" timestamp="1582729133630">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="57" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1582637125374" />
+    <state x="488" y="57" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1582729133630" />
     <state x="479" y="223" width="408" height="288" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1582559957295">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="479" y="223" width="408" height="288" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1582559957295" />
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1582564331979">
+    <state x="413" y="114" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1582727338299">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582564331979" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1582564331979">
+    <state x="413" y="114" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1582727338299" />
+    <state x="140" y="231" width="963" height="449" key="#xdebugger.evaluate" timestamp="1582732451448">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582564331979" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1582564331979">
+    <state x="140" y="231" width="963" height="449" key="#xdebugger.evaluate/0.0.1366.728@0.0.1366.728" timestamp="1582732451448" />
+    <state width="428" height="466" key="DebuggerActiveHint" timestamp="1582732382044">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582564331979" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1582564331979">
+    <state width="428" height="466" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1582732382044" />
+    <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1582732416224">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582564331979" />
+    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582732416224" />
+    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1582732416224">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582732416224" />
+    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1582732416224">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582732416224" />
+    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1582732416224">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582732416224" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1582732429359">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582732429359" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1582732429359">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1582732429359" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1582732429359">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1582732429359" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1582732429359">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1582732429359" />
+    <state x="441" y="78" key="RollbackChangesDialog" timestamp="1582726441193">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="441" y="78" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1582726441193" />
     <state x="184" y="0" key="SettingsEditor" timestamp="1582561271799">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1582561271799" />
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1582561157945">
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1582725473410">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1582561157945" />
-    <state x="390" y="0" width="586" height="728" key="find.popup" timestamp="1582563531574">
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1582725473410" />
+    <state x="390" y="0" width="586" height="728" key="find.popup" timestamp="1582725995486">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="390" y="0" width="586" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1582563531574" />
+    <state x="390" y="0" width="586" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1582725995486" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1582730207454">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1582730207454" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1582636994360">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1582636994360" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dev/converter/FileToEntityConverter.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dev/converter/FileToEntityConverter.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dev/converter/FileToEntityConverter.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="scanner.nextFloat()" language="JAVA" />
+        <watch expression="scanner.nextInt()" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

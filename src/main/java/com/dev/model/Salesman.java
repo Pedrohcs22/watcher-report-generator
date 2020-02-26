@@ -1,14 +1,13 @@
 package com.dev.model;
 
-import com.dev.model.enumeration.PersonType;
+import com.dev.model.enumeration.EntityIdentifier;
 
 public class Salesman extends AbstractPerson {
 
     private float salary;
 
-    public Salesman(String name, String identifier, PersonType personType, float salary) {
-        super(name, identifier, personType);
-        this.salary = salary;
+    public Salesman() {
+        super(EntityIdentifier.SALESMAN);
     }
 
     public float getSalary() {

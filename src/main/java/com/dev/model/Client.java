@@ -1,14 +1,13 @@
 package com.dev.model;
 
-import com.dev.model.enumeration.PersonType;
+import com.dev.model.enumeration.EntityIdentifier;
 
 public class Client extends AbstractPerson {
 
     private String businessArea;
 
-    public Client(String name, String identifier, PersonType personType, String businessArea) {
-        super(name, identifier, personType);
-        this.businessArea = businessArea;
+    public Client() {
+        super(EntityIdentifier.CLIENT);
     }
 
     public String getBusinessArea() {

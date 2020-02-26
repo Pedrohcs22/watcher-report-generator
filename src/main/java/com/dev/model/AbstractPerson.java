@@ -1,19 +1,23 @@
 package com.dev.model;
 
-import com.dev.model.enumeration.PersonType;
+import com.dev.model.enumeration.EntityIdentifier;
 
 public class AbstractPerson {
 
     private String name;
 
-    private String identifier;
+    private EntityIdentifier identifier;
 
-    private PersonType personType;
+    private String documentNumber;
 
-    public AbstractPerson(String name, String identifier, PersonType personType) {
+    public AbstractPerson(EntityIdentifier entityIdentifier) {
+        this.identifier = entityIdentifier;
+    }
+
+    public AbstractPerson(String name, EntityIdentifier identifier, String documentNumber) {
         this.name = name;
         this.identifier = identifier;
-        this.personType = personType;
+        this.documentNumber = documentNumber;
     }
 
     public String getName() {
@@ -24,19 +28,19 @@ public class AbstractPerson {
         this.name = name;
     }
 
-    public String getIdentifier() {
+    public EntityIdentifier getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(EntityIdentifier identifier) {
         this.identifier = identifier;
     }
 
-    public PersonType getPersonType() {
-        return personType;
+    public String getDocumentNumber() {
+        return documentNumber;
     }
 
-    public void setPersonType(PersonType personType) {
-        this.personType = personType;
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
     }
 }
