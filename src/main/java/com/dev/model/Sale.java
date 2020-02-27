@@ -2,24 +2,24 @@ package com.dev.model;
 
 import com.dev.model.enumeration.EntityIdentifier;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 public class Sale {
 
     private static final EntityIdentifier entityIdentifier = EntityIdentifier.SALE;
     private long saleId;
-    private long itemId;
-    private int itemQuantity;
-    private float itemPrice;
     private String salesmanName;
+    private List<Item> items = new ArrayList<>();
 
     public Sale() {
         super();
     }
 
-    public Sale(long saleId, long itemId, int itemQuantity, float itemPrice, String salesmanName) {
+    public Sale(long saleId, long itemId, String salesmanName) {
         this.saleId = saleId;
-        this.itemId = itemId;
-        this.itemQuantity = itemQuantity;
-        this.itemPrice = itemPrice;
         this.salesmanName = salesmanName;
     }
 
@@ -35,28 +35,8 @@ public class Sale {
         this.saleId = saleId;
     }
 
-    public long getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(long itemId) {
-        this.itemId = itemId;
-    }
-
-    public int getItemQuantity() {
-        return itemQuantity;
-    }
-
-    public void setItemQuantity(int itemQuantity) {
-        this.itemQuantity = itemQuantity;
-    }
-
-    public float getItemPrice() {
-        return itemPrice;
-    }
-
-    public void setItemPrice(float itemPrice) {
-        this.itemPrice = itemPrice;
+    public List<Item> getItems() {
+        return items;
     }
 
     public String getSalesmanName() {
@@ -65,5 +45,12 @@ public class Sale {
 
     public void setSalesmanName(String salesmanName) {
         this.salesmanName = salesmanName;
+    }
+
+    public BigDecimal getSaleValue() {
+        Optional<BigDecimal> reduce = getItems().stream()
+                .map(item -> item.getItemPrice().multiply(BigDecimal.valueOf(item.getItemQuantity())))
+                .reduce(BigDecimal::add);
+        return reduce.orElse(BigDecimal.ZERO);
     }
 }

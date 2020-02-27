@@ -1,8 +1,13 @@
 package com.dev.service;
 
+import com.dev.model.datatransferobject.FileDTO;
+import com.dev.model.datatransferobject.ReportDTO;
+
 import java.io.IOException;
 import java.nio.file.*;
 
+import static com.dev.service.CreateReportService.createReportFile;
+import static com.dev.service.InputOutputService.processNewFile;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
@@ -41,7 +46,12 @@ public class WatchFolderService {
                         //  file is a text file.
                         InputOutputService.isTextFile(path, filename);
 
-                        InputOutputService.processNewFile(newPath);
+                        FileDTO fileDTO = processNewFile(newPath);
+
+                        if (fileDTO != null) {
+                            createReportFile(fileDTO);
+                        }
+
                     }
                 }
 

@@ -1,13 +1,14 @@
 package com.dev.service;
 
 import com.dev.converter.FileToEntityConverter;
-import com.dev.model.datatransferobject.ReportDTO;
+import com.dev.model.datatransferobject.FileDTO;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class InputOutputService {
     public static String IN_PATH = "/data/in";
@@ -30,18 +31,19 @@ public class InputOutputService {
         }
     }
 
-    public static void processNewFile(Path newPath) {
+    public static FileDTO processNewFile(Path newPath) {
         try (Scanner scanner = new Scanner(new File(FULL_IN_PATH, newPath.toString()))) {
-
-            ReportDTO reportDTO = new ReportDTO();
+            FileDTO fileDTO = new FileDTO();
 
             while (scanner.hasNextLine()) {
-                FileToEntityConverter.convertFileToEntity(scanner, reportDTO);
+                FileToEntityConverter.convertFileToEntity(scanner, fileDTO);
             }
 
-            reportDTO.getSales();
+            return fileDTO;
         } catch (FileNotFoundException e) {
             System.err.format("IOException: %s%n", e);
         }
+
+        return null;
     }
 }

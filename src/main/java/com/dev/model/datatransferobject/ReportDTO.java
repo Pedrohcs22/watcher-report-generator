@@ -1,32 +1,43 @@
 package com.dev.model.datatransferobject;
 
-import com.dev.model.Client;
-import com.dev.model.Sale;
-import com.dev.model.Salesman;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class ReportDTO {
-
-    private List<Client> clients = new ArrayList<>();
-    private List<Salesman> salesmen = new ArrayList<>();
-    private List<Sale> sales = new ArrayList<>();
+    private int amountOfClients;
+    private int amountOfSalesman;
+    private long idOfMostExpensiveSale;
+    private String nameOfWorstSalesman;
 
     public ReportDTO() {
     }
 
-    public List<Client> getClients() {
-        return clients;
+    public int getAmountOfClients() {
+        return amountOfClients;
     }
 
-    public List<Salesman> getSalesmen() {
-        return salesmen;
+    public void setAmountOfClients(int amountOfClients) {
+        this.amountOfClients = amountOfClients;
     }
 
-    public List<Sale> getSales() {
-        return sales;
+    public int getAmountOfSalesman() {
+        return amountOfSalesman;
+    }
+
+    public void setAmountOfSalesman(int amountOfSalesman) {
+        this.amountOfSalesman = amountOfSalesman;
+    }
+
+    public long getIdOfMostExpensiveSale() {
+        return idOfMostExpensiveSale;
+    }
+
+    public void setIdOfMostExpensiveSale(long idOfMostExpensiveSale) {
+        this.idOfMostExpensiveSale = idOfMostExpensiveSale;
+    }
+
+    public String getNameOfWorstSalesman() {
+        return nameOfWorstSalesman;
+    }
+
+    public void setNameOfWorstSalesman(String nameOfWorstSalesman) {
+        this.nameOfWorstSalesman = nameOfWorstSalesman;
     }
 }
