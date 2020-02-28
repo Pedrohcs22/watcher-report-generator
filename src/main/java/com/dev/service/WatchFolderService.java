@@ -1,13 +1,13 @@
 package com.dev.service;
 
 import com.dev.model.datatransferobject.FileDTO;
-import com.dev.model.datatransferobject.ReportDTO;
 
 import java.io.IOException;
 import java.nio.file.*;
 
-import static com.dev.service.CreateReportService.createReportFile;
+import static com.dev.service.CreateReportService.createReportDTO;
 import static com.dev.service.InputOutputService.processNewFile;
+import static com.dev.service.InputOutputService.writeReportToFile;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
@@ -28,7 +28,7 @@ public class WatchFolderService {
                 for (WatchEvent<?> event : key.pollEvents()) {
                     var kind = event.kind();
 
-                    // OVERFLOW events may happen even if your not subscribed to it
+                    // OVERFLOW events may happen even if you havent subscribed to it
                     if (OVERFLOW == kind) {
                         continue; // loop
                     } else if (ENTRY_CREATE == kind) {
@@ -49,9 +49,9 @@ public class WatchFolderService {
                         FileDTO fileDTO = processNewFile(newPath);
 
                         if (fileDTO != null) {
-                            createReportFile(fileDTO);
+                            var reportDTO = createReportDTO(fileDTO);
+                            writeReportToFile(reportDTO);
                         }
-
                     }
                 }
 

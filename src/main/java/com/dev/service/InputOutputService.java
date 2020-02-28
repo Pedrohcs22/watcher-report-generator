@@ -2,6 +2,7 @@ package com.dev.service;
 
 import com.dev.converter.FileToEntityConverter;
 import com.dev.model.datatransferobject.FileDTO;
+import com.dev.model.datatransferobject.ReportDTO;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +15,10 @@ public class InputOutputService {
     public static String IN_PATH = "/data/in";
     public static String FULL_IN_PATH = System.getProperty("user.dir") + IN_PATH;
     public static String OUT_PATH = "/data/out";
+
+    public static void writeReportToFile(ReportDTO reportDTO) {
+        
+    }
 
     public static boolean isTextFile(Path path, Path filename) {
         try {
