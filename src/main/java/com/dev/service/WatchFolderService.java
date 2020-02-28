@@ -50,7 +50,7 @@ public class WatchFolderService {
 
                         if (fileDTO != null) {
                             var reportDTO = createReportDTO(fileDTO);
-                            writeReportToFile(reportDTO);
+                            writeReportToFile(reportDTO, filename);
                         }
                     }
                 }
