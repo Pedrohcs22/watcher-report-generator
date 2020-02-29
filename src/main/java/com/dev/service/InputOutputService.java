@@ -13,8 +13,13 @@ import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InputOutputService {
+
+    private final static Logger LOGGER = Logger.getLogger(WatchFolderService.class.getName());
+
     public static String IN_PATH = "/data/in";
     public static String FULL_IN_PATH = System.getProperty("user.dir") + IN_PATH;
     public static String OUT_PATH = "/data/out";
@@ -28,10 +33,10 @@ public class InputOutputService {
         //Create the file
         try {
             if (file.createNewFile()) {
-                System.out.println("File is created!");
+                LOGGER.log(Level.INFO, "Report file successfully created!");
                 writeReportDTOToFile(reportDTO, fullPath);
             } else {
-                System.out.println("File already exists.");
+                LOGGER.log(Level.INFO, "File already exists");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,22 +58,17 @@ public class InputOutputService {
     public static boolean isTextFile(Path path, Path filename) {
         try {
             Path child = path.resolve(filename);
-            if (!Files.probeContentType(child).equals("text/plain")) {
-                System.err.format("New file '%s'" +
-                        " is not a plain text file.%n", filename);
-                return false;
-            }
-
-            return true;
-        } catch (IOException x) {
-            System.err.println(x);
+            return Files.probeContentType(child).equals("text/plain");
+        } catch (IOException e) {
+            LOGGER.log(Level.INFO, "Error checking if file is of text type.");
+            LOGGER.log(Level.SEVERE, e.toString());
             return false;
         }
     }
 
     public static FileDTO processNewFile(Path newPath) {
         try (Scanner scanner = new Scanner(new File(FULL_IN_PATH, newPath.toString()))) {
-            FileDTO fileDTO = new FileDTO();
+            var fileDTO = new FileDTO();
 
             while (scanner.hasNextLine()) {
                 FileToEntityConverter.convertFileToEntity(scanner, fileDTO);
@@ -76,7 +76,8 @@ public class InputOutputService {
 
             return fileDTO;
         } catch (FileNotFoundException e) {
-            System.err.format("IOException: %s%n", e);
+            LOGGER.log(Level.INFO, "Error reading file.");
+            LOGGER.log(Level.SEVERE, e.toString());
         }
 
         return null;

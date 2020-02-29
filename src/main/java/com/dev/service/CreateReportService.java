@@ -5,8 +5,14 @@ import com.dev.model.datatransferobject.FileDTO;
 import com.dev.model.datatransferobject.ReportDTO;
 
 import java.math.BigDecimal;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.naturalOrder;
+import static java.util.stream.Collectors.joining;
 
 public class CreateReportService {
 
@@ -19,14 +25,14 @@ public class CreateReportService {
         return reportDTO;
     }
 
-    public static long idOfMostExpensiveSale(List<Sale> sales) {
+    private static long idOfMostExpensiveSale(List<Sale> sales) {
         var maxOptional = sales.stream()
-                .max(Comparator.comparing(Sale::getSaleValue));
+                .max(comparing(Sale::getSaleValue));
 
         return maxOptional.map(Sale::getSaleId).orElse(0L);
     }
 
-    public static String worstSalesmanName(FileDTO fileDTO) {
+    private static String worstSalesmanName(FileDTO fileDTO) {
         var salesBySalesmanName = new HashMap<String, BigDecimal>();
 
         fileDTO.getSalesmen()
@@ -39,12 +45,12 @@ public class CreateReportService {
                     salesBySalesmanName.put(salesman.getName(), allSalesSum.orElse(BigDecimal.ZERO));
                 });
 
-        var minOptional = salesBySalesmanName.values().stream().min(Comparator.naturalOrder());
+        var minOptional = salesBySalesmanName.values().stream().min(naturalOrder());
 
         return minOptional.map(bigDecimal -> salesBySalesmanName.entrySet().stream()
                 .filter(e -> e.getValue().compareTo(bigDecimal) == 0)
                 .map(Map.Entry::getKey)
-                .collect(Collectors.joining(", "))).orElse("");
+                .collect(joining(", "))).orElse("");
     }
 
 }
