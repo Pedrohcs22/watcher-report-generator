@@ -1,0 +1,4 @@
+Worst Salesman: Pedro
+Amount of Clients: 1
+Amount of Salesman: 1
+Id of most expensive Sale: 10

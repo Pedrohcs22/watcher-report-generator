@@ -28,7 +28,7 @@ public class InputOutputService {
     public static String FULL_OUT_PATH = System.getProperty("user.dir") + OUT_PATH;
 
     public static void writeReportToFile(ReportDTO reportDTO, Path filename) {
-        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmssSS").format(new Date());
         String fullPath = FULL_OUT_PATH + "/" + timestamp + "-" + filename;
         File file = new File(fullPath);
 
