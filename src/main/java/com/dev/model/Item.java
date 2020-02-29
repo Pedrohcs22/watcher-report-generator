@@ -10,6 +10,12 @@ public class Item {
     public Item() {
     }
 
+    public Item(long itemId, int itemQuantity, BigDecimal itemPrice) {
+        this.itemId = itemId;
+        this.itemQuantity = itemQuantity;
+        this.itemPrice = itemPrice;
+    }
+
     public long getItemId() {
         return itemId;
     }

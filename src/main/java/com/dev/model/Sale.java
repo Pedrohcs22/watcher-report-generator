@@ -7,28 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Sale {
+public class Sale extends AbstractEntity {
 
-    private static final EntityIdentifier entityIdentifier = EntityIdentifier.SALE;
     private long saleId;
     private String salesmanName;
     private List<Item> items = new ArrayList<>();
 
     public Sale() {
-        super();
+        super(EntityIdentifier.SALE);
     }
 
     public Sale(long saleId, long itemId, String salesmanName) {
+        super(EntityIdentifier.SALE);
         this.saleId = saleId;
         this.salesmanName = salesmanName;
     }
 
     public long getSaleId() {
         return saleId;
-    }
-
-    public static EntityIdentifier getEntityIdentifier() {
-        return entityIdentifier;
     }
 
     public void setSaleId(long saleId) {

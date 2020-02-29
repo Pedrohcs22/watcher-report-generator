@@ -2,22 +2,14 @@ package com.dev.model;
 
 import com.dev.model.enumeration.EntityIdentifier;
 
-public class AbstractPerson {
+public class AbstractPerson extends AbstractEntity {
 
     private String name;
-
-    private EntityIdentifier identifier;
 
     private String documentNumber;
 
     public AbstractPerson(EntityIdentifier entityIdentifier) {
-        this.identifier = entityIdentifier;
-    }
-
-    public AbstractPerson(String name, EntityIdentifier identifier, String documentNumber) {
-        this.name = name;
-        this.identifier = identifier;
-        this.documentNumber = documentNumber;
+        super(entityIdentifier);
     }
 
     public String getName() {
@@ -26,14 +18,6 @@ public class AbstractPerson {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public EntityIdentifier getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(EntityIdentifier identifier) {
-        this.identifier = identifier;
     }
 
     public String getDocumentNumber() {
