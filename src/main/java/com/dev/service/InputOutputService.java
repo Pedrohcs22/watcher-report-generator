@@ -1,6 +1,6 @@
 package com.dev.service;
 
-import com.dev.converter.FileToEntityConverter;
+import com.dev.exception.InvalidInputLineException;
 import com.dev.model.datatransferobject.FileDTO;
 import com.dev.model.datatransferobject.ReportDTO;
 
@@ -16,6 +16,8 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.dev.converter.FileToEntityConverter.convertFileToEntity;
+
 public class InputOutputService {
 
     private final static Logger LOGGER = Logger.getLogger(WatchFolderService.class.getName());
@@ -26,7 +28,7 @@ public class InputOutputService {
     public static String FULL_OUT_PATH = System.getProperty("user.dir") + OUT_PATH;
 
     public static void writeReportToFile(ReportDTO reportDTO, Path filename) {
-        String timestamp = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String fullPath = FULL_OUT_PATH + "/" + timestamp + "-" + filename;
         File file = new File(fullPath);
 
@@ -69,9 +71,15 @@ public class InputOutputService {
     public static FileDTO processNewFile(Path newPath) {
         try (Scanner scanner = new Scanner(new File(FULL_IN_PATH, newPath.toString()))) {
             var fileDTO = new FileDTO();
+            int rowCounter = 0;
 
             while (scanner.hasNextLine()) {
-                FileToEntityConverter.convertFileToEntity(scanner, fileDTO);
+                rowCounter++;
+                try {
+                    convertFileToEntity(scanner.nextLine(), fileDTO, rowCounter);
+                } catch (InvalidInputLineException ex) {
+                    LOGGER.log(Level.SEVERE, ex.toString());
+                }
             }
 
             return fileDTO;

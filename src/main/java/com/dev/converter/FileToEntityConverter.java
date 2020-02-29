@@ -1,5 +1,6 @@
 package com.dev.converter;
 
+import com.dev.exception.InvalidInputLineException;
 import com.dev.model.Client;
 import com.dev.model.Item;
 import com.dev.model.Sale;
@@ -10,34 +11,41 @@ import com.dev.model.enumeration.EntityIdentifier;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.Scanner;
 
-import static com.dev.model.enumeration.EntityIdentifier.*;
+import static com.dev.model.enumeration.EntityIdentifier.valueOf;
+import static java.lang.Integer.parseInt;
 
 public class FileToEntityConverter {
 
-    public static void convertFileToEntity(Scanner scanner, FileDTO fileDTO) {
-        String line = scanner.nextLine();
+    public static void convertFileToEntity(String line, FileDTO fileDTO, int row) throws InvalidInputLineException {
         var valuesArray = line.split("ç");
+        int intIdentifier;
 
-        int intIdentifier = Integer.parseInt(valuesArray[0]);
+        try {
+            intIdentifier = parseInt(valuesArray[0]);
+        } catch (NumberFormatException ex) {
+            throw new InvalidInputLineException("Row number " + row + " has a invalid identifier.");
+        }
 
         Optional<EntityIdentifier> entityIdentifier = valueOf(intIdentifier);
+        if (valuesArray.length != 4) {
+            throw new InvalidInputLineException("Row number " + row + " has a invalid identifier.");
+        }
 
         entityIdentifier.ifPresent(identifier -> {
-                switch (identifier) {
-                    case SALESMAN:
-                        fileToSalesman(valuesArray, fileDTO);
-                        break;
-                    case CLIENT:
-                        fileToClient(valuesArray, fileDTO);
-                        break;
-                    case SALE:
-                        fileToSale(valuesArray, fileDTO);
-                        break;
-                    default:
-                        break;
-                }
+            switch (identifier) {
+                case SALESMAN:
+                    fileToSalesman(valuesArray, fileDTO);
+                    break;
+                case CLIENT:
+                    fileToClient(valuesArray, fileDTO);
+                    break;
+                case SALE:
+                    fileToSale(valuesArray, fileDTO);
+                    break;
+                default:
+                    break;
+            }
         });
     }
 
@@ -80,7 +88,7 @@ public class FileToEntityConverter {
         var itemData = item.split("-");
         Item newItem = new Item();
         newItem.setItemId(Long.parseLong(itemData[0]));
-        newItem.setItemQuantity(Integer.parseInt(itemData[1]));
+        newItem.setItemQuantity(parseInt(itemData[1]));
         newItem.setItemPrice(new BigDecimal(itemData[2]));
         sale.getItems().add(newItem);
     }

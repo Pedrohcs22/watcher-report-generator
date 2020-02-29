@@ -1,13 +1,14 @@
 package com.dev.converter;
 
+import com.dev.exception.InvalidInputLineException;
 import com.dev.model.Item;
 import com.dev.model.datatransferobject.FileDTO;
 import com.dev.model.enumeration.EntityIdentifier;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,10 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class TestFileToEntityConverter {
     @Test
-    public void testFileToSalesman() {
-        Scanner scanner = new Scanner("001ç1234567891234çPedroç50000");
+    public void testFileToSalesman() throws InvalidInputLineException {
         var fileDTO = new FileDTO();
-        FileToEntityConverter.convertFileToEntity(scanner, fileDTO);
+        FileToEntityConverter.convertFileToEntity("001ç1234567891234çPedroç50000", fileDTO, 1);
         var salesman = fileDTO.getSalesmen().get(0);
         assertEquals(salesman.getIdentifier(), EntityIdentifier.SALESMAN);
         assertEquals(salesman.getDocumentNumber(), "1234567891234");
@@ -28,10 +28,9 @@ public class TestFileToEntityConverter {
     }
 
     @Test
-    public void testFileToClient() {
-        Scanner scanner = new Scanner("002ç2345675434544345çJose da SilvaçRural");
+    public void testFileToClient() throws InvalidInputLineException {
         var fileDTO = new FileDTO();
-        FileToEntityConverter.convertFileToEntity(scanner, fileDTO);
+        FileToEntityConverter.convertFileToEntity("002ç2345675434544345çJose da SilvaçRural", fileDTO, 1);
         var client = fileDTO.getClients().get(0);
         assertEquals(client.getIdentifier(), EntityIdentifier.CLIENT);
         assertEquals(client.getDocumentNumber(), "2345675434544345");
@@ -40,16 +39,29 @@ public class TestFileToEntityConverter {
     }
 
     @Test
-    public void testFileToSale() {
-        Scanner scanner = new Scanner("003ç10ç[1-10-100,2-30-2.50]çPedro");
+    public void testFileToSale() throws InvalidInputLineException {
         var fileDTO = new FileDTO();
-        FileToEntityConverter.convertFileToEntity(scanner, fileDTO);
+        FileToEntityConverter.convertFileToEntity("003ç10ç[1-10-100,2-30-2.50]çPedro", fileDTO, 1);
         var sale = fileDTO.getSales().get(0);
         assertEquals(EntityIdentifier.SALE, sale.getIdentifier());
         assertEquals(10, sale.getSaleId());
         assertEquals(2, sale.getItems().size());
         assertItems(sale.getItems());
         assertEquals("Pedro", sale.getSalesmanName());
+    }
+
+    @Test
+    public void shouldThrowOnInvalidIdentifier() {
+        Assertions.assertThrows(InvalidInputLineException.class, () -> {
+            FileToEntityConverter.convertFileToEntity("aaaç10ç[1-10-100,2-30-2.50]çPedro", new FileDTO(), 1);
+        });
+    }
+
+    @Test
+    public void shouldThrowOnWrongAmountOfInputs() {
+        Assertions.assertThrows(InvalidInputLineException.class, () -> {
+            FileToEntityConverter.convertFileToEntity("001ç10ç[1-10-100,2-30-2.50]", new FileDTO(), 1);
+        });
     }
 
     private void assertItems(List<Item> itemList) {

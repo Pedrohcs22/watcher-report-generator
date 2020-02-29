@@ -7,6 +7,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +30,7 @@ public class WatchFolderService {
 
         LOGGER.log(Level.INFO, "Watching path: " + path);
 
-        //ExecutorService executorService = Executors.newFixedThreadPool(4);
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
         try (WatchService watcher = FileSystems.getDefault().newWatchService()) {
 
             path.register(watcher, ENTRY_CREATE);
@@ -43,30 +45,11 @@ public class WatchFolderService {
                     if (OVERFLOW == kind) {
                         continue;
                     } else if (ENTRY_CREATE == kind) {
-
-                        //executorService.submit();
-
-                        // The filename is the
-                        // context of the event.
-                        Path filename = ((WatchEvent<Path>) event).context();
-
-                        LOGGER.log(Level.INFO, "New file identified: " + filename);
-
-                        // Verify that the new
-                        //  file is a text file.
-                        if (!isTextFile(path, filename)) {
-                            LOGGER.log(Level.SEVERE, "File " + filename + "is not a text file, aborting operation.");
-                            continue;
-                        }
-
-                        FileDTO fileDTO = processNewFile(filename);
-
-                        if (fileDTO != null) {
-                            var reportDTO = createReportDTO(fileDTO);
-                            writeReportToFile(reportDTO, filename);
-                        } else {
-                            LOGGER.log(Level.WARNING, "No data retrieved from file: " + filename);
-                        }
+                        // The new files will be distributed between 4 threads, in order to speed up the process
+                        // since there's no dependency between files.
+                        executorService.submit(() -> {
+                            parseFileToReport(path, (WatchEvent<Path>) event);
+                        });
                     }
                 }
 
@@ -78,7 +61,31 @@ public class WatchFolderService {
         } catch (IOException | InterruptedException ioe) {
             ioe.printStackTrace();
         } finally {
-            //executorService.shutdown();
+            LOGGER.log(Level.INFO, "Shuting down executor service.");
+            executorService.shutdown();
+        }
+    }
+
+    private static void parseFileToReport(Path path, WatchEvent<Path> event) {
+        // The filename is the
+        // context of the event.
+        Path filename = event.context();
+
+        LOGGER.log(Level.INFO, "New file identified: " + filename);
+        // Verify that the new
+        //  file is a text file.
+        if (!isTextFile(path, filename)) {
+            LOGGER.log(Level.SEVERE, "File " + filename + "is not a text file, aborting operation.");
+            return;
+        }
+
+        FileDTO fileDTO = processNewFile(filename);
+
+        if (fileDTO != null) {
+            var reportDTO = createReportDTO(fileDTO);
+            writeReportToFile(reportDTO, filename);
+        } else {
+            LOGGER.log(Level.WARNING, "No data retrieved from file: " + filename);
         }
     }
 }
