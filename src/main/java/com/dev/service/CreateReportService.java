@@ -35,15 +35,8 @@ public class CreateReportService {
     private static String worstSalesmanName(FileDTO fileDTO) {
         var salesBySalesmanName = new HashMap<String, BigDecimal>();
 
-        fileDTO.getSalesmen()
-                .forEach(salesman -> {
-                    Optional<BigDecimal> allSalesSum = fileDTO.getSales().stream()
-                            .filter(sale -> sale.getSalesmanName().equals(salesman.getName()))
-                            .map(Sale::getSaleValue)
-                            .reduce(BigDecimal::add);
-
-                    salesBySalesmanName.put(salesman.getName(), allSalesSum.orElse(BigDecimal.ZERO));
-                });
+        fileDTO.getSales().forEach(sale -> salesBySalesmanName
+                .merge(sale.getSalesmanName(), sale.getSaleValue(), BigDecimal::add));
 
         var minOptional = salesBySalesmanName.values().stream().min(naturalOrder());
 
